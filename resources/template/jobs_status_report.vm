@@ -1,0 +1,14 @@
+<html>
+<body>
+	
+	${allJobs}
+	<br>
+	<br>
+	<br>
+	${stoppedJobs}
+	
+	
+	
+	
+</body>
+</html>

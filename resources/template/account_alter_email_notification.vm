@@ -1,0 +1,20 @@
+<html>
+<h3>
+<br>Following accounts have been created in Oracle Sales Cloud.
+Please associate the following list of accounts to respective sales account owner.<br><br> 
+</h3>
+<body>
+   <table  border="1">
+    <th>Account Name</th><th>OSC Party Id</th><th>EBS Customer Number</th><th>EBS ORG PROFILE SYSTEM REFERENCE NUMBER</th>
+     #foreach($ac in $accCache)
+     	<tr>
+     		<td>$ac.accountName</td>
+     		<td>$ac.oscPartyId</td>
+     		<td>$ac.ebsCustomerNumber</td>
+     		<td>$ac.ebsPrimaryKey</td>
+     		
+     	</tr>
+	#end
+   </table>
+</body>
+</html>

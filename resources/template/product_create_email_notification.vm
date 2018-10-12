@@ -1,0 +1,19 @@
+<html>
+<h3>
+<br>Following products have been created in Oracle Sales Cloud.
+Please associate the following list of products to respective product group.<br><br> 
+</h3>
+<body>
+   <table  border="1">
+    <th>Item Id</th><th>Item Number</th><th>Family</th><th>Sub Family</th>
+     #foreach($product in $products)
+     	<tr>
+     		<td>$product.itemId</td>
+     		<td>$product.itemNumber</td>
+     		<td>$product.family</td>
+     		<td>$product.subFamily</td>
+     	</tr>
+	#end
+   </table>
+</body>
+</html>

@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd"
+	version="1.0">
+    <!-- GETS POLLING INFO FROM POLLING INFO TABLE OF STAGING DATABASE -->
+
+
+
+
+	<named-query name="GET_LOOKUP_VALUE">
+		<query>
+ 			<![CDATA[ 
+ 				     select o from com.hdr.model.Lookup o where  entityName = ? and keyName = ? and isActive = true
+ 				]]> 
+ 		</query>
+	</named-query>
+	
+
+	<named-query name="GET_CONVERSION_JOB_STATUS_INFO">
+		<query>
+ 			<![CDATA[ 
+ 				     select o from com.hdr.model.Job o where  job_name = 'CurrencyConversionEbsToOscSyncJob'
+ 				]]> 
+ 		</query>
+	</named-query>
+	
+	
+	<named-query name="FIND_EMPLOYEE_LANGUAGE">
+		<query>
+ 			<![CDATA[ 
+ 				     select o from com.hdr.model.EmployeeLanguage o where  EMPLOYEE_ID = ?
+ 				]]> 
+ 		</query>
+	</named-query>
+
+	<named-query name="GET_UNPROCESSED_PROJECTS_HEADER">
+		<query>
+ 			<![CDATA[ 
+ 				     select o from com.hdr.model.Project o where ((PROCESS_STATE = 'READY') or (PROCESS_STATE='ERROR' and RETRY_COUNT<3))
+ 				]]> 
+ 		</query>
+	</named-query>
+	
+		<named-query name="GET_UNPROCESSED_PROJECT_FEE_COST">
+		<query>
+ 			<![CDATA[ 
+ 				     select o from com.hdr.model.ProjectFeeCost o where (((PROCESS_STATE = 'READY') or (PROCESS_STATE='ERROR' and RETRY_COUNT<3)) and PROJECT_ID = ?)
+ 				]]> 
+ 		</query>
+	</named-query>
+	
+			<named-query name="GET_UNPROCESSED_PROJECT_LOCATION">
+		<query>
+ 			<![CDATA[ 
+ 				     select o from com.hdr.model.ProjectLocation o where (((PROCESS_STATE = 'READY') or (PROCESS_STATE='ERROR' and RETRY_COUNT<3)) and PROJECT_ID = ?)
+ 				]]> 
+ 		</query>
+	</named-query>
+
+	<named-query name="GET_UNPROCESSED_PROJECT_SUBCONS">
+		<query>
+ 			<![CDATA[ 
+ 				     select o from com.hdr.model.ProjectSubcons o where (((PROCESS_STATE = 'READY') or (PROCESS_STATE='ERROR' and RETRY_COUNT<3)) and PROJECT_ID = ?)
+ 				]]> 
+ 		</query>
+	</named-query>
+	
+
+	<named-query name="GET_BATCH_KEY">
+		<query>
+ 			<![CDATA[ 
+ 				     select o from com.hdr.model.IntegrationStatistic o where TABLENAME = ? and SYNC_STATUS='READY'
+ 				]]> 
+ 		</query>
+	</named-query>
+
+	<named-query name="GET_POLLING_INFO">
+		<query>
+ 			<![CDATA[ 
+ 				     select o from com.hdr.model.PollingInfo o where JOB_NAME = ?
+ 				]]> 
+ 		</query>
+	</named-query>
+	
+	<!-- <named-query name="GET_UNPROCESSED_EMPLOYEES">
+		<query>
+ 			<![CDATA[ 
+ 				     select o from com.crmod.model.Employee o where (SYNC_STATUS ='NEW' and SYNC_STATE='ODS_TO_OSC') or(SYNC_STATUS ='ERROR' and SYNC_STATE='ODS_TO_OSC' and RETRY_COUNT < 3)
+ 				]]> 
+ 		</query>
+	</named-query>
+	
+	
+	<named-query name="GET_UNPROCESSED_PROJECTS">
+		<query>
+ 			<![CDATA[ 
+ 				     select o from com.crmod.model.Project o where (SYNC_STATUS ='NEW' and SYNC_STATE='ODS_TO_OSC') or(SYNC_STATUS ='ERROR' and SYNC_STATE='ODS_TO_OSC' and RETRY_COUNT < 3)
+ 				]]> 
+ 		</query>
+	</named-query> -->
+	
+	<named-query name="GET_UNPROCESSED_ACCOUNT_DATALOAD">
+		<query>
+ 			<![CDATA[ 
+ 				     select o from com.hdr.model.Account o where PROCESS_STATE = ?
+ 				]]> 
+ 		</query>
+	</named-query> 
+	
+	<named-query name="GET_UNPROCESSED_PROJECT_COST_FEE_FOR_DELETE">
+		<query>
+ 			<![CDATA[ 
+ 				     select o from com.hdr.model.DeleteProjectCostFee o where PROCESS_STATE = ?
+ 				]]> 
+ 		</query>
+	</named-query> 
+	
+		<named-query name="GET_UNPROCESSED_PROJECT_LOCATION_FOR_DELETE">
+		<query>
+ 			<![CDATA[ 
+ 				     select o from com.hdr.model.DeleteProjectLocation o where PROCESS_STATE = ?
+ 				]]> 
+ 		</query>
+	</named-query> 
+	
+	<named-query name="GET_UNPROCESSED_EMPLOYEE_PROJECT_FOR_DELETE">
+		<query>
+ 			<![CDATA[ 
+ 				     select o from com.hdr.model.DeleteEmployeeProject o where PROCESS_STATE = ?
+ 				]]> 
+ 		</query>
+	</named-query> 
+	
+	<named-query name="GET_UNPROCESSED_ACCOUNT">
+		<query>
+ 			<![CDATA[ 
+ 				     select o from com.hdr.model.Account o where ((PROCESS_STATE='READY') or (PROCESS_STATE='ERROR' and RETRY_COUNT<3))
+ 				]]> 
+ 		</query>
+	</named-query> 
+	
+		<named-query name="GET_UNPROCESSED_CHILD_ACCOUNT">
+		<query>
+ 			<![CDATA[ 
+ 				     select o from com.hdr.model.Account o where ((PROCESS_STATE='READY') or (PROCESS_STATE='ERROR' and RETRY_COUNT<3)) and CLIENTACCT_EBS_ID is not null
+ 				]]> 
+ 		</query>
+	</named-query> 
+	
+		<named-query name="GET_UNPROCESSED_PARENT_ACCOUNT">
+		<query>
+ 			<![CDATA[ 
+ 				     select o from com.hdr.model.Account o where ((PROCESS_STATE='READY') or (PROCESS_STATE='ERROR' and RETRY_COUNT<3)) and CLIENTACCT_EBS_ID is null
+ 				]]> 
+ 		</query>
+	</named-query>
+
+	<!-- code added by Nagesh on 11/26/2015 for Employee -->
+	<named-query name="GET_UNPROCESSED_EMPLOYEES_HEADER">
+		<query>
+ 			<![CDATA[ 
+ 				     select o from com.hdr.model.Employee o where ((PROCESS_STATE = 'READY') or (PROCESS_STATE='ERROR' and RETRY_COUNT<3))
+ 				]]> 
+ 		</query>
+	</named-query>
+	
+	<named-query name="GET_UNPROCESSED_EMPLOYEES_EDUCATION">
+		<query>
+ 			<![CDATA[ 
+ 				     select o from com.hdr.model.EmployeeEducation o where (((PROCESS_STATE = 'READY') or (PROCESS_STATE='ERROR' and RETRY_COUNT<3)) and EMPLOYEE_ID = ?)
+ 				]]> 
+ 		</query>
+	</named-query>
+	
+		<named-query name="GET_UNPROCESSED_EMPLOYEES_TRAINING">
+		<query>
+ 			<![CDATA[ 
+ 				     select o from com.hdr.model.EmployeeTraining o where (((PROCESS_STATE = 'READY') or (PROCESS_STATE='ERROR' and RETRY_COUNT<3)) and EMPLOYEE_ID = ?)
+ 				]]> 
+ 		</query>
+	</named-query>
+	<!-- code end -->
+	<named-query name="GET_UNPROCESSED_CONTRACT_HEADER">
+		<query>
+ 			<![CDATA[ 
+ 				     select o from com.hdr.model.Contract o where (PROCESS_STATE = 'READY') or (PROCESS_STATE='ERROR' and RETRY_COUNT<3)
+ 				]]> 
+ 		</query>
+	</named-query>
+	
+	<named-query name="GET_UNPROCESSED_EMPLOYEES_PROJECTS">
+		<query>
+ 			<![CDATA[ 
+ 				     select o from com.hdr.model.EmployeeProjects o where (((PROCESS_STATE = 'READY') or (PROCESS_STATE='FAILED' and RETRY_COUNT<3)) and EMPLOYEE_ID = ?)
+ 				]]> 
+ 		</query>
+	</named-query>
+	
+	<named-query name="GET_UNPROCESSED_EMPLOYEES_CREDENTIALS">
+		<query>
+ 			<![CDATA[ 
+ 				     select o from com.hdr.model.EmployeeCredentials o where (((PROCESS_STATE = 'READY') or (PROCESS_STATE='FAILED' and RETRY_COUNT<3)) and EMPLOYEE_ID = ?)
+ 				]]> 
+ 		</query>
+	</named-query>
+	
+	<named-query name="GET_UNPROCESSED_EMPLOYEES_PUBLICATIONSPRESENTATIONS">
+		<query>
+ 			<![CDATA[ 
+ 				     select o from com.hdr.model.EmployeePublicationsNPresentations o where (((PROCESS_STATE = 'READY') or (PROCESS_STATE='FAILED' and RETRY_COUNT<3)) and EMPLOYEE_ID = ?)
+ 				]]> 
+ 		</query>
+	</named-query>
+	
+	
+	
+	
+</entity-mappings>

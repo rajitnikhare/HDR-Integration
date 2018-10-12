@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context 
+                           http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- Edit 'mail.properties' to set a valid user and password for the mail sender. -->
+    
+   <bean id="velocityEngine" class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
+   	  <property name="resourceLoaderPath"><value>classpath:template</value></property>
+<!--    	  <property name="file.resource.loader.cache"><value>true</value></property> -->
+<!-- 	  <property name="resource.loader.modificationCheckInterval"><value>10</value></property> -->
+     <property name="velocityProperties">
+               <value>
+         	 	resource.loader=class
+          		class.resource.loader.class=org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+        	 </value>
+      </property>
+   </bean>
+   
+<!--	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+	    <property name="host" value="${mail.host}" />
+		<property name="port" value="${mail.port}" />
+		<property name="javaMailProperties">
+			<props>
+			    <prop key="mail.debug">false</prop>
+            	<prop key="mail.smtp.auth">false</prop>
+        	</props>
+		</property>
+
+
+	</bean> -->
+
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<!-- <property name="host" value="${mail.host}"/> -->
+		<!-- <property name="host" value="${mail.host}"/> -->
+		<!-- <property name="port" value="${mail.port}"/> -->
+		<property name="username" value="salesapp@caviumnetworks.com" />
+		<property name="password" value="Juyu62211" />
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.user">salesapp@caviumnetworks.com</prop>
+				<prop key="mail.password">Juyu62211</prop>
+				<prop key="mail.debug">true</prop>
+				<prop key="mail.protocol">smtp</prop>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.smtp.host">192.168.16.225</prop>
+				<prop key="mail.smtp.socketFactory.port">25</prop>
+				<!-- <prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</prop> -->
+				<!-- <prop key="mail.smtp.socketFactory.fallback">true</prop> -->
+				<!-- <prop key="mail.sender">${mail.sender}</prop> <prop key="mail.receivers">${mail.receivers}</prop> -->
+			</props>
+		</property>
+	</bean>
+	
+	
+		<bean id="mailServcImpl" class="com.hdr.service.impl.MailServcImpl">
+			<property name="userName" value="${mail.username}" />
+			<property name="password" value="${mail.password}" />
+			<property name="auth" value="${mail.smtp.auth}" />
+			<property name="starttls" value="${mail.smtp.starttls.enable}" />
+			<property name="port" value="${mail.smtp.port}" />
+			<property name="host" value="${mail.smtp.host}" />
+		</bean>
+	
+	
+	
+	
+	
+</beans>

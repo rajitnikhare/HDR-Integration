@@ -1,0 +1,11 @@
+<html>
+<h4>
+	One or more records failed in ${direction} ${objectName} integration.
+	<br>
+	Please refer the database table with following query	 
+	<br>
+	select * from  ${tableName} where sync_status='ERROR'
+	<br>
+</h4>
+<br>
+</html>

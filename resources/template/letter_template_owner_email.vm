@@ -1,0 +1,14 @@
+<html>
+<body>
+
+Hello ${OwnerName},
+<BR><BR>
+Please find attached the letters for you to send out today. Please take a print out of them and mail it out to our customers.
+<BR><BR>
+Thank you,
+<BR>
+Drees System Admin Team.
+
+	
+</body>
+</html>

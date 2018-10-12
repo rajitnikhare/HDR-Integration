@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.0" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+	<persistence-unit name="persistenceUnit" transaction-type="RESOURCE_LOCAL">	
+        <provider>org.hibernate.ejb.HibernatePersistence</provider>
+      	<mapping-file>META-INF/query.xml</mapping-file>
+    
+		<class>com.hdr.model.Account</class>
+		 <class>com.hdr.model.Job</class>
+		<class>com.hdr.model.PollingInfo</class>
+		<class>com.hdr.model.SystemProperty</class>
+		<class>com.hdr.model.Lookup</class>
+		<class>com.hdr.model.LookupId</class>
+		<class>com.hdr.model.IntegrationStatistic</class>
+		<class>com.hdr.model.Project</class>
+		<class>com.hdr.model.ProjectFeeCost</class>
+		<class>com.hdr.model.ProjectFeeCostCompositekey</class>
+		<class>com.hdr.model.ProjectLocation</class>
+		<class>com.hdr.model.ProjectLocationCompositeKey</class>
+		<class>com.hdr.model.ProjectSubcons</class>
+		<class>com.hdr.model.ProjectSubconsCompositeKey</class>
+		<class>com.hdr.model.Employee</class>
+		<class>com.hdr.model.EmployeeEducation</class>
+		<class>com.hdr.model.EmployeeEducationCompositeKey</class>
+		<class>com.hdr.model.EmployeeTraining</class>
+		<class>com.hdr.model.EmployeeTrainingCompositeKey</class>
+		<class>com.hdr.model.EmployeeProjects</class>
+		<class>com.hdr.model.EmployeeProjectsCompositeKey</class>
+		<class>com.hdr.model.EmployeeCredentials</class>
+		<class>com.hdr.model.EmployeeCredentialsCompositeKey</class>	
+		<class>com.hdr.model.EmployeePublicationsNPresentations</class>
+		<class>com.hdr.model.EmployeePublicationsNPresentationsCompositeKey</class>		
+		<class>com.hdr.model.ErrorLogForOdsOsc</class>
+		<class>com.hdr.model.ErrorLog</class>	
+		<class>com.hdr.model.EmployeeLanguage</class>
+		<class>com.hdr.model.Contract</class>
+		<!-- <class>com.hdr.model.DeleteEmployeeProject</class>
+		<class>com.hdr.model.DeleteProjectCostFee</class>
+		<class>com.hdr.model.DeleteProjectLocation</class>
+	 -->
+	
+		<exclude-unlisted-classes>true</exclude-unlisted-classes>
+        <properties>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.ejb.naming_strategy" value="org.hibernate.cfg.ImprovedNamingStrategy"/>
+            <property name="hibernate.connection.charSet" value="UTF-8"/>
+            <property name="hibernate.show_sql" value="true"/>
+        </properties>
+    </persistence-unit>
+
+
+	<persistence-unit name="persistenceUnitEBS" transaction-type="RESOURCE_LOCAL">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<mapping-file>META-INF/queryEbs.xml</mapping-file>
+		<class>com.hdr.model.Company</class>
+		<class>com.hdr.model.Location</class>
+		<class>com.hdr.model.PursuitProject</class>
+		<class>com.hdr.model.LocationAcklg</class>
+		<class>com.hdr.model.CompanyAcklg</class>
+		<class>com.hdr.model.PursuitProjectAcklg</class>
+		<class>com.hdr.model.DeliveryProject</class>
+		<class>com.hdr.model.ConversionRate</class>
+		<class>com.hdr.model.ConversionRateCompositeKey</class>
+		<!-- <class>com.hdr.model.ErrorLog</class> -->
+		<exclude-unlisted-classes>true</exclude-unlisted-classes>
+		<properties>
+			 <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.ejb.naming_strategy" value="org.hibernate.cfg.ImprovedNamingStrategy"/>
+            <property name="hibernate.connection.charSet" value="UTF-8"/>
+            <property name="hibernate.show_sql" value="true"/>
+		</properties>
+	</persistence-unit>
+</persistence>

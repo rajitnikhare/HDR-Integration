@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="HDR_Integration" default="create-war" basedir=".">
+	<!-- ===================================== -->
+	<!--         Global properties             -->
+	<!-- ===================================== -->	
+	<property name="dir.deploy" location="${basedir}/deploy"/>
+	<property name="dir.dist"  location="${basedir}/dist"/>
+	<property name="dir.classes"  location="${dir.deploy}/classes"/>	
+    <property name="dir.src"  location="${basedir}/src"/>
+	<property name="dir.src.java"  location="${dir.src}"/>    
+	<property name="dir.src.webapp"  location="${basedir}/WebContent"/>
+	<property name="dir.lib"  location="${dir.src.webapp}/WEB-INF/lib"/>
+	
+	<property name="dir.data-files"  location="${basedir}/seed-data"/>
+	<property name="deploy.war.rel-file" value="${dir.dist}/${ant.project.name}.war" />
+	<property file="${basedir}/build.properties" />
+
+	<!-- Classpath -->		
+	<path id="project.classpath">
+		<fileset dir="${dir.lib}">		  
+		  <include name="**/*.jar"/>		  	  
+		</fileset>
+		<pathelement location="${dir.classes}"/>
+	</path>
+	<target name="clean">
+		<delete dir="${dir.deploy}" />
+		<delete dir="${dir.dist}" />
+		<echo message = "Finished Clean..." />
+	</target>	
+	
+	<!-- Creates Required Folder Structure -->
+	<target name="init">
+		<mkdir dir="${dir.deploy}"/>
+		<mkdir dir="${dir.classes}"/>
+		<mkdir dir="${dir.dist}" />
+		<echo message = "Finished Init..." />
+	</target>
+	
+	<!-- Compiles the .java files -->	
+	<target name="compile" depends="init">		
+		<javac target="1.7" source="1.7"  debug="true" destdir="${dir.classes}" deprecation="on" classpathref="project.classpath"  >
+			<src path="${dir.src.java}" />
+		</javac>
+		<echo message="Finished Compile ..."/>
+	</target>
+	
+	<target name="substitute-values" description="substitute values for symbolic names in template files">
+		<echo message="jdbc ...${jdbcprop}"/>
+		<echo message="app ...${application}"/>
+		
+	    <copy file="${jdbcprop}" tofile="${dir.classes}/META-INF/spring/jdbc.properties" overwrite="true">
+	    </copy>
+	    
+	    <copy file="${application}" tofile="${dir.classes}/application.properties" overwrite="true">
+	    </copy>
+		
+		<copy file="${log4j}" tofile="${dir.classes}/log4j.xml" overwrite="true">
+	    </copy>
+	</target>
+
+	<target name="check-env">
+		<available file="${jdbcprop}" property="${database.url}" />
+		<echo>Usage : ant -Djdbc=[pathToFilename]</echo>
+		<fail unless="${database.url}" message="Build unsuccessful since jdbc properties file does not exist or database parameters are incorrect?" />
+	</target>
+
+	<!--  create war file-->
+	<target name="create-war" depends="check-env,clean,compile,substitute-values">
+		<!-- description="Create Web application ARchive" -->
+        <war  destfile="${deploy.war.rel-file}">
+            <!-- web content -->
+
+            <zipfileset dir="${dir.src.webapp}"
+                        includes="**/*" excludes="**/classes/**/*"  />
+            <!-- compiled classes and resource files -->
+        	<zipfileset dir="${dir.src}"
+        	                        includes="**/*.properties,**/*.xml,**/*.sh"
+        	                        prefix="WEB-INF/classes" >
+        		<exclude name="log4j.xml" />
+        	</zipfileset>
+            <zipfileset dir="${dir.classes}"
+                        includes="**/*.class,**/*.properties,**/*.xml,**/*.sh"
+                        prefix="WEB-INF/classes">
+            </zipfileset>
+            <zipfileset dir="${basedir}/resources"
+                        includes="**/*.*"
+                        prefix="WEB-INF/classes">
+            	<exclude name="log4j.xml" />
+            	<exclude name="META-INF/spring/jdbc.properties" />
+            	<exclude name="application.properties" />
+            </zipfileset>
+        </war>
+    </target>
+
+	<!-- Copies WAR to the specfied directory -->	
+	<target name="deploy-war" depends="create-war">		
+		<copy todir="${deploy.dir}" file="${deploy.war.rel-file}" />
+		<echo message="Finished Deploy ..."/>
+	</target>
+	
+	<target name="set-staging-env">	
+		<property name="jdbcprop" value="jdbc_staging.properties" />
+		<property name="application" value="application_staging.properties" />
+		<property name="log4j" value="log4j_staging.xml" />
+	</target>
+	<target name="set-prod-env">	
+		<property name="jdbcprop" value="jdbc_production.properties" />
+		<property name="application" value="application_prod.properties" />
+		<property name="log4j" value="log4j_production.xml" />
+	</target>
+	<target name="deploy-staging" depends="clean,set-staging-env,create-war">
+		<copy todir="${deploy.dir}" file="${deploy.war.rel-file}" />
+		<echo message="Finished Deploy ..."/>
+	</target>
+	<target name="deploy-prod" depends="clean,set-prod-env,create-war">		
+		<copy todir="${deploy.dir}" file="${deploy.war.rel-file}" />
+		<echo message="Finished Deploy ..."/>
+	</target>
+</project>

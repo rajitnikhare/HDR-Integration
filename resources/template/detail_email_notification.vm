@@ -1,0 +1,20 @@
+<html>
+<h3>
+Error details of the records are: 
+</h3>
+<body>
+   <table  border="1">
+    <th>ErrorLog RowId</th><th>Object Name</th><th>Direction<th>Primary Field Value</th></th><th>CRM-OD Error Message</th>
+     #foreach($error in $errors)
+     	<tr>
+     		<td>$error.ErrorLogRowId</td>
+     		<td>$error.Object</td>
+     		<td>$error.Direction</td>
+     		<td>$error.PrimaryFieldValue</td>
+     		<td>$error.ErrorMessage</td>
+     		
+     	</tr>
+	#end
+   </table>
+</body>
+</html>

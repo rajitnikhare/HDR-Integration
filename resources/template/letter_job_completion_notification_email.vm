@@ -1,0 +1,38 @@
+<html>
+<body>
+	
+	<br>Letters have been sent to following owners:<br><br>
+	
+	<table border="1">
+	<tr>
+	   
+	   <th> Owner </th>
+	   <th> Owner's Email Id </th>
+	   <th> Letters Sent</th>
+	</tr>
+	
+	${success_msg}
+	
+	</table>
+	
+	<BR><BR>
+	
+		<br>Could not send Letters for Following Opportunities:<br><br>
+			
+	${error_msg}
+	
+	</table>
+	
+	<BR><BR>
+	
+	Note: For more details about the error (if any), please review the error logs and error notification emails.
+	
+		<BR><BR>
+	
+Thank you,
+<BR>
+Drees System Admin Team.
+	
+	
+</body>
+</html>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/task
+    http://www.springframework.org/schema/task/spring-task-3.1.xsd">
+
+	<!-- 0 0 0/4 1/1 * ?  Every 4 hour back up -->
+	 
+
+	
+  	<task:scheduler id="scheduler1" pool-size="1"/>
+	<task:scheduled-tasks scheduler="scheduler1">   
+		<task:scheduled ref="pursuitProjectOSCToEBSSyncJob" method="executeInternal" cron="0 0/5 * 1/1 * ?"/> 
+	</task:scheduled-tasks>  
+	
+	 <task:scheduler id="scheduler2" pool-size="3"/>
+	<task:scheduled-tasks scheduler="scheduler2">   
+		<task:scheduled ref="companyOscToEbsSyncJob" method="executeInternal" cron="0 0/5 * 1/1 * ?"/> 
+	</task:scheduled-tasks>  														 
+	
+	 <task:scheduler id="scheduler3" pool-size="3"/>
+ 	<task:scheduled-tasks scheduler="scheduler3">   
+		<task:scheduled ref="companyAcklgEBSToOSCSyncJob" method="executeInternal" cron="0 0/5 * 1/1 * ?"/> 
+	</task:scheduled-tasks>  
+	 <task:scheduler id="scheduler7" pool-size="3"/>
+	 <task:scheduled-tasks scheduler="scheduler7">   
+		<task:scheduled ref="companyODSToOSCSyncJob" method="executeInternal" cron="0 0/5 * 1/1 * ?"/> 
+	</task:scheduled-tasks>  
+	
+	 <task:scheduler id="scheduler4" pool-size="1"/>
+	<task:scheduled-tasks scheduler="scheduler4">   
+		<task:scheduled ref="pursuitProjectAcklgEBSToOSCSyncJob" method="executeInternal" cron="0 0/5 * 1/1 * ?"/> 
+	</task:scheduled-tasks>  
+	
+   <task:scheduler id="scheduler9" pool-size="1"/>
+	<task:scheduled-tasks scheduler="scheduler9">   
+		<task:scheduled ref="deliveryProjectWonOpportunitySyncJob" method="executeInternal" cron="0 0/5 * 1/1 * ?"/> 
+	</task:scheduled-tasks> 
+	
+		   <task:scheduler id="scheduler10" pool-size="1"/>
+	<task:scheduled-tasks scheduler="scheduler10">   
+		<task:scheduled ref="projectODSToOSCSyncJob" method="executeInternal" cron="0 0/5 * 1/1 * ?"/> 
+	</task:scheduled-tasks> 
+	
+	<task:scheduler id="scheduler11" pool-size="1"/>
+	<task:scheduled-tasks scheduler="scheduler11">   
+		<task:scheduled ref="contractODSToOSCSyncJob" method="executeInternal" cron="0 0/2 * 1/1 * ?"/> 
+	</task:scheduled-tasks> 
+	
+	<task:scheduler id="scheduler12" pool-size="1"/>
+	<task:scheduled-tasks scheduler="scheduler12">   
+		<task:scheduled ref="currencyConversionEbsToOscSyncJob" method="executeInternal" cron="0 0/5 * 1/1 * ?"/> 
+	</task:scheduled-tasks> 
+	
+	<task:scheduler id="scheduler13" pool-size="1"/>
+	<task:scheduled-tasks scheduler="scheduler13">   
+		<task:scheduled ref="dataLoadEmployeeODSToOSCSyncJob" method="executeInternal" cron="0 0/2 * 1/1 * ?"/> 
+	</task:scheduled-tasks> 
+	
+		<task:scheduler id="scheduler14" pool-size="1"/>
+	<task:scheduled-tasks scheduler="scheduler14">   
+		<task:scheduled ref="dataLoadProjectODSToOSCSyncJob" method="executeInternal" cron="0 0/2 * 1/1 * ?"/> 
+	</task:scheduled-tasks> 
+	
+	
+			<task:scheduler id="scheduler15" pool-size="1"/>
+	<task:scheduled-tasks scheduler="scheduler15">   
+		<task:scheduled ref="dataLoadCompanyODSToOSCSyncJob" method="executeInternal" cron="0 0/2 * 1/1 * ?"/> 
+	</task:scheduled-tasks> 
+</beans>

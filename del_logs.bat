@@ -1,0 +1,1 @@
+DEL C:\HDR_logs\hdr*

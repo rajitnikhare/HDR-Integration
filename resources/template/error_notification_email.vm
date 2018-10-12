@@ -1,0 +1,20 @@
+<html>
+<body>
+	
+	<table border="1">
+	<tr>
+	   
+	   <th> Error Timestamp </th>
+	   <th> Table Name </th>
+	   <th> Primary Field Name</th>
+	   <th> Primary Field Value</th>
+	   <th> Error Message </th>
+	</tr>
+	
+	${errorMessage}
+	
+	</table>
+	
+	
+</body>
+</html>

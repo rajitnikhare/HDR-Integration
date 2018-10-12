@@ -1,0 +1,13 @@
+<html>
+<h3>
+$simpleMessage
+</h3>
+<body>
+   <table  border="1">
+   <tr>
+   	<td>Detailed Error Message</td>
+	<td>$detailedMessage</td>
+	</tr>
+   </table>
+</body>
+</html>

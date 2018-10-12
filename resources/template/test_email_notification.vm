@@ -1,0 +1,10 @@
+<html>
+<h3>
+Summary
+</h3>
+<body>
+   <table  border="1">
+	<td>This is a Test Velocity Template Mail</td>
+   </table>
+</body>
+</html>

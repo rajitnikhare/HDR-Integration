@@ -1,0 +1,36 @@
+<html>
+<body>
+	
+	<br>Following Opportunities have failed to download in staging table
+	 due to missing Employee record in ET_EMPLOYEE_TRANSLATION table :<br><br>
+	
+	<table border="1">
+	<tr>
+	   
+	   <th> Opportunity CRM ID </th>
+	   <th> Opportunity Number </th>
+	   <th> Employee/Owner's Name</th>
+	   <th> Employee/Owner's CRM ID</th>
+	</tr>
+	
+	${msg}
+	
+	</table>
+	
+	<BR><BR>
+	
+	<b>Action Required:</b> In order to re-trigger the opportunity download. Please perform following steps:<br>
+	<ol>
+     <li>Create entry for the above Employee/Owner in ET_EMPLOYEE_TRANSLATION staging table.</li>
+     <li>After creating the entry, again update the opportunity, so that the download process can again download it.</li>
+    </ol> 
+
+	
+	
+Thank you,
+<BR>
+Drees System Admin Team.
+	
+	
+</body>
+</html>
